@@ -1,0 +1,213 @@
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #1a1a1a;
+  color: white;
+}
+
+.header {
+  background-color: #2d2d2d;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  flex-shrink: 0;
+  position: relative;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+}
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #00ff88;
+  box-shadow: 0 0 15px #00ff88;
+  animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+body {  
+  background: linear-gradient(-45deg, #0a0a0a, #1a1a2e, #16213e, #0a3445);
+  background-size: 400% 400%;
+  animation: gradientFlow 15s ease infinite;
+}
+body::before {
+  content: '';
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  animation: particles 20s linear infinite;
+}
+@keyframes particles {
+  from { transform: translateY(0) translateX(0); }
+  to { transform: translateY(-100vh) translateX(-50vw); }
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #00ff88;
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+.status-indicator {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 20px;
+  background: #2d2d2d;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.status-connected .status-dot { background: #00ff88; }
+.status-connecting .status-dot { background: #ffd700; }
+.status-disconnected .status-dot { background: #ff4444; }
+.support-button {
+  background-color: #00ff88;
+  color: #1a1a1a;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+main {
+  flex: 1;
+  min-height: 0; /* Crucial for proper height calculation */
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  grid-template-rows: 1fr; /* Single row taking full height */
+  height: 100%;
+  box-sizing: border-box;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+.section:first-child { /* Audio section */
+  grid-column: 1;
+  min-width: 0; /* Crucial for fr units to work */
+}
+
+.section:last-child { /* Chat+Controls section */
+  grid-column: 2;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.support-button:hover {  
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 255, 136, 0.3);
+}
+
+.hero {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 1fr); /* 75%-25% */
+  grid-template-rows: 100%;
+  gap: 1rem;
+  height: calc(100vh - [header-height]); /* Subtract your header height */
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+
+.section {
+  background-color: #2d2d2d;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+  min-height: 0; /* Allows content to shrink */
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  animation: hologram 6s linear infinite;
+}
+
+.section h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #00ff88;
+}
+
+@media (max-width: 768px) {
+  .grid-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: 60vh auto;
+  }
+  
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .section:first-child {
+    grid-row: 1;
+    grid-column: 1;
+  }
+  
+  .section:last-child {
+    grid-row: 2;
+    grid-column: 1;
+    height: calc(40vh - 2rem);
+  }
+  
+  .header {
+    padding: 1rem;
+  }
+  
+  .support-button {
+    padding: 0.6rem 1rem;
+  }
+  @keyframes loading-pulse {
+    0% { opacity: 0.4; }
+    50% { opacity: 1; }
+    100% { opacity: 0.4; }
+  }
+}
